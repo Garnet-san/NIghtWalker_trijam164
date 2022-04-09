@@ -1,0 +1,124 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://sources/scripts/MainMenuPlayButton.gd" type="Script" id=1]
+[ext_resource path="res://sources/prefab/UIFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://sources/prefab/Skybox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://sources/prefab/Ground_type1.tscn" type="PackedScene" id=4]
+[ext_resource path="res://sources/prefab/Ground_type2.tscn" type="PackedScene" id=5]
+[ext_resource path="res://sources/prefab/Ground_type4.tscn" type="PackedScene" id=6]
+[ext_resource path="res://sources/prefab/Ground_type3.tscn" type="PackedScene" id=7]
+[ext_resource path="res://sources/scripts/HSlider.gd" type="Script" id=8]
+[ext_resource path="res://sources/scenes/OptionsButton.gd" type="Script" id=9]
+[ext_resource path="res://sources/scenes/BackButton.gd" type="Script" id=10]
+[ext_resource path="res://assets/audio/Main_Menu.mp3" type="AudioStream" id=11]
+
+[node name="MainMenu" type="Node"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+current = true
+
+[node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 11 )
+autoplay = true
+mix_target = 2
+
+[node name="Control" type="Control" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+
+[node name="PlayButton" type="Button" parent="Control"]
+margin_left = 412.0
+margin_top = 110.0
+margin_right = 612.0
+margin_bottom = 200.0
+custom_fonts/font = ExtResource( 2 )
+text = "Play"
+script = ExtResource( 1 )
+
+[node name="LevelSelectionButton" type="Button" parent="Control"]
+margin_left = 412.0
+margin_top = 255.0
+margin_right = 612.0
+margin_bottom = 345.0
+custom_fonts/font = ExtResource( 2 )
+disabled = true
+text = "Levels"
+
+[node name="OptionsButton" type="Button" parent="Control"]
+margin_left = 412.0
+margin_top = 400.0
+margin_right = 612.0
+margin_bottom = 490.0
+custom_fonts/font = ExtResource( 2 )
+text = "Options"
+script = ExtResource( 9 )
+
+[node name="Control2" type="Control" parent="."]
+visible = false
+margin_right = 1024.0
+margin_bottom = 600.0
+
+[node name="Label" type="Label" parent="Control2"]
+margin_left = 212.0
+margin_top = 255.0
+margin_right = 412.0
+margin_bottom = 345.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "Audio"
+
+[node name="Label2" type="Label" parent="Control2"]
+margin_left = 612.0
+margin_top = 255.0
+margin_right = 812.0
+margin_bottom = 345.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "50%"
+align = 1
+
+[node name="HSlider" type="HSlider" parent="Control2"]
+margin_left = 412.0
+margin_top = 255.0
+margin_right = 612.0
+margin_bottom = 345.0
+min_value = -60.0
+max_value = 0.0
+step = 0.6
+script = ExtResource( 8 )
+
+[node name="BackButton" type="Button" parent="Control2"]
+margin_left = 100.0
+margin_top = 410.0
+margin_right = 300.0
+margin_bottom = 500.0
+custom_fonts/font = ExtResource( 2 )
+text = "Back"
+script = ExtResource( 10 )
+
+[node name="Skybox" parent="." instance=ExtResource( 3 )]
+position = Vector2( 512, 600 )
+scale = Vector2( 0.28, 0.28 )
+z_index = -1
+
+[node name="Node2D" type="Node2D" parent="."]
+scale = Vector2( 0.3, 0.3 )
+
+[node name="Ground_type2" parent="Node2D" instance=ExtResource( 5 )]
+position = Vector2( 636.667, 1743.33 )
+
+[node name="Ground_type1" parent="Node2D" instance=ExtResource( 4 )]
+position = Vector2( 1200, 1446.67 )
+
+[node name="Ground_type3" parent="Node2D" instance=ExtResource( 7 )]
+position = Vector2( 2486.67, 1556.67 )
+
+[node name="Ground_type4" parent="Node2D" instance=ExtResource( 6 )]
+position = Vector2( 2996.67, 1766.67 )
+
+[connection signal="pressed" from="Control/PlayButton" to="Control/PlayButton" method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="Control/OptionsButton" to="Control/OptionsButton" method="_on_OptionsButton_pressed"]
+[connection signal="value_changed" from="Control2/HSlider" to="Control2/HSlider" method="_on_HSlider_value_changed"]
+[connection signal="pressed" from="Control2/BackButton" to="Control2/BackButton" method="_on_BackButton_pressed"]

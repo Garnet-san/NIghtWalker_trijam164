@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://sources/prefab/UIFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://sources/scripts/ContinueButton.gd" type="Script" id=2]
+[ext_resource path="res://sources/scripts/BackToMenuButton.gd" type="Script" id=3]
+[ext_resource path="res://sources/scripts/PauseMenu.gd" type="Script" id=4]
+
+[node name="PauseMenu" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+
+[node name="ContinueButton" type="Button" parent="."]
+margin_left = 357.0
+margin_top = 255.0
+margin_right = 667.0
+margin_bottom = 345.0
+custom_fonts/font = ExtResource( 1 )
+text = "Continue"
+script = ExtResource( 2 )
+
+[node name="BackToMenuButton" type="Button" parent="."]
+margin_left = 357.0
+margin_top = 400.0
+margin_right = 667.0
+margin_bottom = 490.0
+custom_fonts/font = ExtResource( 1 )
+text = "Main Menu"
+script = ExtResource( 3 )
+
+[node name="PauseLabel" type="Label" parent="."]
+margin_left = 357.0
+margin_top = 110.0
+margin_right = 667.0
+margin_bottom = 200.0
+custom_fonts/font = ExtResource( 1 )
+text = "Paused"
+align = 1
+valign = 1
+
+[connection signal="pressed" from="ContinueButton" to="ContinueButton" method="_on_ContinueButton_pressed"]
+[connection signal="pressed" from="BackToMenuButton" to="BackToMenuButton" method="_on_BackToMenuButton_pressed"]
